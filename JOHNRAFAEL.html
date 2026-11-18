@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication Love ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: #100d19;
+    color: white;
+    font-family: Arial, sans-serif;
+    transition: background 1s;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+.message {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.table-area {
+    width: min(100%, 850px);
+}
+
+.table-title {
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.tile {
+    min-height: 115px;
+    padding: 8px;
+    border: 3px solid #b69be9;
+    border-radius: 13px;
+    background: linear-gradient(145deg, #ddd1f4, #9c83c6);
+    color:#e2d0fa;
+    box-shadow: 0 4px 12px #f0cece88;
+    transition: 0.5s;
+}
+
+.tile:hover {
+    transform: scale(1.05);
+}
+
+.number {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.equation {
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 9px;
+}
+
+.answer {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 3px;
+}
+
+.video {
+    width: 270px;
+    max-width: 90%;
+    border: 4px solid #b69be9;
+    border-radius: 15px;
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    pointer-events: none;
+    animation: float 6s linear forwards;
+    z-index: 5;
+}
+
+@keyframes float {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media(max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .tile {
+        min-height: 100px;
+        padding: 5px;
+    }
+
+    .equation {
+        font-size: 13px;
+    }
+
+    .answer {
+        font-size: 25px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1 class="random-color"> ❤️</h1>
+
+<p class="message random-color">
+    MULTIPLICATION! 💗
+</p>
+
+<div class="main">
+
+    <div class="table-area">
+
+        <div class="table-title random-color">
+            ✦ MULTIPLICATION TABLE ✦
+        </div>
+
+        <div class="grid" id="table"></div>
+
+    </div>
+
+  
+
+</div>
+
+<script>
+// Generate multiplication cards
+const table = document.getElementById("table");
+
+for (let i = 1; i <= 10; i++) {
+    for (let j = 1; j <= 10; j++) {
+
+        const tile = document.createElement("div");
+        tile.className = "tile";
+
+        tile.innerHTML = `
+            <div class="number">${i} × ${j}</div>
+            <div class="equation">${i} × ${j} =</div>
+            <div class="answer">${i * j}</div>
+        `;
+
+        table.appendChild(tile);
+    }
+}
+
+// Random color generator
+function randomColor() {
+    return "#" + Math.floor(Math.random() * 16777216)
+        .toString(16).padStart(6, "0");
+}
+
+// Change colors randomly
+setInterval(() => {
+
+    document.querySelectorAll(".random-color").forEach(el => {
+        el.style.color = randomColor();
+    });
+
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.style.borderColor = randomColor();
+        tile.style.background =
+            `linear-gradient(145deg, ${randomColor()}, ${randomColor()})`;
+    });
+
+}, 1500);
+
+// Floating hearts
+const hearts = ["❤️", "💗", "💕", "💖", "💘", "💝"];
+
+setInterval(() => {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.textContent =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+
+}, 300);
+
+</script>
+
+</body>
+</html>
