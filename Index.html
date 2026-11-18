@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiplication Love ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 15px;
+    background: #100d19;
+    color: white;
+    font-family: Arial, sans-serif;
+    transition: background 1s;
+}
+
+h1 {
+    text-align: center;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: .3; }
+}
+
+.message, .table-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.table-area {
+    flex: 1;
+    max-width: 850px;
+}
+
+.table-title {
+    font-size: 24px;
+    margin: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.tile {
+    background: #b69be9;
+    color: #171020;
+    border: 3px solid #f4b1b1;
+    border-radius: 12px;
+    padding: 8px;
+    min-height: 95px;
+    transition: .5s;
+}
+
+.number {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.equation {
+    text-align: center;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.answer {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.video {
+    width: 270px;
+    max-width: 100%;
+    border: 3px solid white;
+    border-radius: 15px;
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    animation: float 6s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes float {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media(max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .main {
+        flex-direction: column;
+        align-items: center;
+    }
+    .table-area {
+        width: 100%;
+    }
+    .video {
+        align-self: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+
+<p class="message random-color">
+MULTIPLICATION! 💗
+</p>
+
+<div class="main">
+
+    <div class="table-area">
+        <div class="table-title random-color">
+            ✦ MULTIPLICATION TABLE ✦
+        </div>
+
+        <div class="grid" id="table"></div>
+    </div>
+
+
+</div>
+
+<script>
+// Multiplication table
+const table = document.getElementById("table");
+
+for (let i = 1; i <= 10; i++) {
+    for (let j = 1; j <= 10; j++) {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+
+        tile.innerHTML = `
+            <div class="number">${i} × ${j}</div>
+            <div class="equation">${i} × ${j} =</div>
+            <div class="answer">${i * j}</div>
+        `;
+
+        table.appendChild(tile);
+    }
+}
+
+// Random colors
+function randomColor() {
+    return "#" + Math.floor(Math.random() * 16777215)
+    .toString(16).padStart(6, "0");
+}
+
+setInterval(() => {
+    document.querySelectorAll(".random-color").forEach(el => {
+        el.style.color = randomColor();
+    });
+
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.style.background =
+            `linear-gradient(145deg, ${randomColor()}, ${randomColor()})`;
+        tile.style.borderColor = randomColor();
+    });
+
+    document.body.style.backgroundColor = randomColor();
+}, 2000);
+
+// Floating hearts
+const hearts = ["❤️","💗","💕","💖","💘","💝"];
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
